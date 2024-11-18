@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import DateComponent from "./components/DateComponent";
 
 
+
 function App() {
     const [tasks, setTasks] = useState(() => {
         const storedTodos = localStorage.getItem('tasks');

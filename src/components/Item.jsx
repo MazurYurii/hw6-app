@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+
 import { useState } from "react";
+import { ModalWindow } from '../components/modalWindow/ModalWindow'
 
 function Item({title, id, status, tasks, setTasks, taskTime}) {
     const [checked, setChecked] = useState(status);
     const [isEdit, setIsEdit] = useState(false);
     const [taskEdit, setTaskEdit] = useState(title);
+    const [modalState, setModalState] = useState(false);
 
     const classes = ['todo'];
     if (checked) {
@@ -56,7 +58,8 @@ function Item({title, id, status, tasks, setTasks, taskTime}) {
                 </label>
                 <button onClick={onSaveTime}>Save</button>
                 <i className="material-icons red-text" onClick={onRemoveItem}>X</i>
-                </div>   
+                </div>
+                  
             </li>
         )
     } else {
@@ -69,9 +72,9 @@ function Item({title, id, status, tasks, setTasks, taskTime}) {
                     <small>{formatDateTime(taskTime)}</small>
                 </label>
                 <button onClick={() => setIsEdit(true)}>Edit</button>
-                <i className="material-icons red-text" onClick={onRemoveItem}>X</i>
+                <i className="material-icons red-text" onClick={() => setModalState(true)}>X</i>
                 </div>
-                
+                <ModalWindow call={modalState} onDestroy={() => setModalState(false)} onRemoveItem={onRemoveItem}/>
             </li>
         )
     }
